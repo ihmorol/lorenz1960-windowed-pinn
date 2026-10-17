@@ -80,7 +80,11 @@ class WindowedPINN(nn.Module):
         super().__init__()
         spans = split_windows(cfg.t_span, cfg.n_windows)
         self.edges = [a for a, _ in spans] + [spans[-1][1]]
-        self.windows = nn.ModuleList(PINN(replace(cfg, t_span=s, n_windows=1)) for s in spans)
+        self.windows = nn.ModuleList(PINN(replace(cfg, t_span=s, n_windows=1, shared_network=False))
+                                     for s in spans)
+        if cfg.shared_network:
+            for w in self.windows[1:]:
+                w.net = self.windows[0].net
         self.ic, self.gamma, self.end_state = cfg.ic, cfg.gamma, None
         self.t0, self.tf = float(cfg.t_span[0]), float(cfg.t_span[1])
 

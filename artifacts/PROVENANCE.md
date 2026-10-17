@@ -11,4 +11,4 @@
 The public bundle contains 16 paper-related runs. Later stability experiments
 and unrelated exploratory results are excluded.
 
-Published text files use LF line endings; numerical values and checkpoint bytes are preserved. The historical shared-network retraining script is incomplete; direct evaluation of all three saved R6 checkpoints is verified.
+Published text files use LF line endings; numerical values and checkpoint bytes are preserved. The initial bundle contained an obsolete sequential prototype. The completed shared-network implementation, causal resume support, ablation/Colab drivers, table generator and their regression tests were recovered from the recorded ed43703 commit. The prototype was removed. The unarchived dirty diff remains unavailable, so exact historical source identity is not established. Direct evaluation of all three saved R6 checkpoints is verified.

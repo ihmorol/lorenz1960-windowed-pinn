@@ -1,15 +1,19 @@
 {
-  "stress_tests": {
-    "passed": 31,
-    "failed": 0
+  "full_regression_suite": {
+    "tests": 80,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
   },
-  "core_suite": {
-    "tests": 41,
-    "unchanged_tests_passed": 40,
-    "remaining_test": "test_root_scripts_compile",
-    "remaining_test_passed_after_package_inventory_update": true
-  },
-  "snapshot_regression": "Exact four pre-step/final-state epoch files asserted; no training behavior changed",
-  "syntax_checks": "All shipped Python files compile",
-  "full_training_rerun": false
+  "suite_files": [
+    "src/pinn/test_pinn.py",
+    "src/pinn/test_stress.py",
+    "src/pinn/test_resume_and_suite.py"
+  ],
+  "recovered_regression_tests": 8,
+  "torch_threads": 4,
+  "syntax_checks": "all published Python files compile",
+  "full_training_rerun": false,
+  "live_colab_drive_retested": false,
+  "note": "The synchronous tool timed out while tests continued; the completed JUnit report confirms all 80 tests passed."
 }

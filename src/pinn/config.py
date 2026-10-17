@@ -1,9 +1,9 @@
-"""Central configuration and numerical-reference access for the PINN experiments."""
+"""Central configuration and locked-baseline access for the FYDP-2 PINN."""
 from __future__ import annotations
 
 import sys
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 
 import numpy as np
@@ -39,6 +39,7 @@ class Config:
     causal_delta: float = 0.99
     causal_max_iters: int = 0
     warm_start: bool = False
+    shared_network: bool = False   # windows share one network: sequential single-network training
 
     depth: int = 4
     width: int = 60
@@ -111,6 +112,8 @@ class Config:
         if self.epochs < 1 or min(self.lbfgs_iters, self.causal_max_iters, self.checkpoint_every,
                self.snapshot_every, self.print_every) < 0 or min(self.log_every, self.eval_every) < 1:
             raise ValueError("epochs and log intervals must be positive; other counts nonnegative")
+        if self.shared_network and self.n_windows < 2:
+            raise ValueError("shared_network needs n_windows > 1")
         if self.n_windows > 1 and self.end_state is not None:
             raise ValueError("global end_state is not implemented for windowed training")
         if self.points_per_unit is not None:
@@ -139,17 +142,14 @@ class Config:
             record["end_state"] = tuple(record["end_state"])
         return cls(**record)
 
+    def matches(self, record: dict) -> bool:
+        """Same training settings as a saved record, wherever either was written."""
+        return settings(record) == settings(self.record())
+
     def ensure_record(self) -> None:
         path = self.ckpt_path / "config.json"
-        # The three output directories are anchored to the machine's repo root,
-        # so they differ across machines; resuming a committed run elsewhere is
-        # exactly the point of the record. Only real settings are compared.
-        paths = ("results_dir", "ckpt_dir", "runs_dir")
         if path.exists():
-            existing = json.loads(path.read_text())
-            mine = json.loads(json.dumps(self.record()))
-            if {k: v for k, v in existing.items() if k not in paths} != \
-                    {k: v for k, v in mine.items() if k not in paths}:
+            if not self.matches(json.loads(path.read_text())):
                 raise ValueError(f"run configuration differs from {path}; choose a new run directory")
             return
         if (self.ckpt_path / "pinn.pt").exists() or (self.ckpt_path / "progress.pt").exists():
@@ -200,6 +200,8 @@ class Config:
             tag += "_causal"
         if self.warm_start:
             tag += "_warm"
+        if self.shared_network:
+            tag += "_shared"
         return tag
 
     @property
@@ -211,6 +213,16 @@ class Config:
             + (f", {self.n_windows} windows" if self.n_windows > 1 else "")
             + (", causal" if self.causal_eps_schedule else "")
         )
+
+
+_PATHS = ("results_dir", "ckpt_dir", "runs_dir")
+
+
+def settings(record: dict) -> dict:
+    """A record without machine-specific output paths; fields added after it was
+    written take their defaults, which is how the run was actually trained."""
+    full = {f.name: f.default for f in fields(Config)} | record
+    return {k: v for k, v in json.loads(json.dumps(full)).items() if k not in _PATHS}
 
 
 def _resolve(path: str) -> Path:

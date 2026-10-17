@@ -38,7 +38,7 @@ def _load_progress(cfg: Config, model, device):
         state = torch.load(path, map_location=device, weights_only=False)
     except TypeError:  # torch < 2.6
         state = torch.load(path, map_location=device)
-    if json.loads(json.dumps(state["config"])) != json.loads(json.dumps(cfg.record())):
+    if not cfg.matches(state["config"]):
         raise ValueError(f"checkpoint configuration differs from {path}")
     model.load_state_dict(state["model"])
     torch.set_rng_state(state["torch_rng"].cpu())
@@ -47,8 +47,9 @@ def _load_progress(cfg: Config, model, device):
         torch.cuda.set_rng_state_all([rng.cpu() for rng in state["cuda_rng"]])
     history = state["history"]
     if history.snapshots is not None:
-        if history.snapshots.dir.resolve() != (cfg.results_path / "breakdown").resolve():
-            raise ValueError("checkpoint snapshot directory differs from run directory")
+        # the checkpoint may come from another checkout or machine
+        history.snapshots.dir = cfg.results_path / "breakdown"
+        history.snapshots.dir.mkdir(parents=True, exist_ok=True)
         kept = {f"epoch_{epoch:06d}.csv" for epoch in history.snapshots.epochs}
         for file in history.snapshots.dir.glob("epoch_*.csv"):
             if file.name not in kept:
@@ -118,7 +119,8 @@ def train(cfg: Config) -> tuple[PINN, TrainHistory]:
         if progress is not None and state["mode"] != "windows":
             raise ValueError("checkpoint mode differs from windowed configuration")
         train_windows(model, grid, cfg, history, t_start, t_ref, ys_ref,
-                      state["next_window"] if progress is not None else 0)
+                      state["next_window"] if progress is not None else 0,
+                      state.get("inside") if progress is not None else None)
         return model, history
 
     adam, sched = adam_with_decay(model.parameters(), cfg)
@@ -217,9 +219,11 @@ def train(cfg: Config) -> tuple[PINN, TrainHistory]:
 
 
 def train_windows(model, grid: Tensor, cfg: Config, history: TrainHistory, t_start: float,
-                  t_ref: np.ndarray, ys_ref: np.ndarray, start_window: int = 0) -> None:
+                  t_ref: np.ndarray, ys_ref: np.ndarray, start_window: int = 0,
+                  inside: dict | None = None) -> None:
     """Window by window: Adam under each eps until min_i w_i > delta, then L-BFGS, then hand
-    the end state to the next window. One window with an empty schedule is plain Adam."""
+    the end state to the next window. One window with an empty schedule is plain Adam.
+    ``inside`` resumes window ``start_window`` mid-Adam (saved every ``checkpoint_every``)."""
     windows = list(model.windows) if isinstance(model, WindowedPINN) else [model]
     stages = list(cfg.causal_eps_schedule) or [None]
     cap = cfg.causal_max_iters if cfg.causal_eps_schedule else cfg.epochs
@@ -254,15 +258,23 @@ def train_windows(model, grid: Tensor, cfg: Config, history: TrainHistory, t_sta
             # outgoing window's residual at the state it hands forward.
             endpoint = torch.tensor([[model.edges[k + 1]]], dtype=grid.dtype, device=device)
             pts = torch.cat((pts, endpoint))
-        if k and cfg.warm_start:
+        resumed = inside if k == start_window else None
+        if k and cfg.warm_start and resumed is None:
             with torch.no_grad():
                 for p, q in zip(sub.net.parameters(), windows[k - 1].net.parameters()):
                     p.copy_(q)
         adam, sched = adam_with_decay(sub.parameters(), cfg, cap * len(stages))
-        for eps in stages:
-            stage_start = history.adam_iters
+        if resumed is not None:
+            adam.load_state_dict(resumed["adam"])
+            sched.load_state_dict(resumed["sched"])
+            history.resumed_from = len(history.loss)
+        for s, eps in enumerate(stages):
+            if resumed is not None and s < resumed["stage"]:
+                continue
+            first = resumed["step"] if resumed is not None and s == resumed["stage"] else 0
+            stage_start = history.adam_iters - first
             met = False
-            for step in range(cap):
+            for step in range(first, cap):
                 epoch = len(history.loss)
                 model.zero_grad(set_to_none=True)
                 t = pts.clone().requires_grad_(True)
@@ -301,6 +313,11 @@ def train_windows(model, grid: Tensor, cfg: Config, history: TrainHistory, t_sta
                     if history.min_w[-1] > cfg.causal_delta:
                         met = True
                         break
+                if cfg.checkpoint_every and history.adam_iters % cfg.checkpoint_every == 0:
+                    history.wall_clock_s = time.perf_counter() - t_start
+                    _save_progress(cfg, model, history, mode="windows", complete=False, next_window=k,
+                                   inside={"stage": s, "step": step + 1, "adam": adam.state_dict(),
+                                           "sched": sched.state_dict()})
             if eps is not None:
                 history.eps_marks.append((len(history.loss), eps))
                 history.stage_status.append({"window": k, "eps": eps,

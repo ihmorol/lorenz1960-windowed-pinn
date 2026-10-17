@@ -100,7 +100,6 @@ def verify_aggregate_table(runs: list[Path]) -> None:
 
 def load_config(run: Path) -> Config:
     record = json.loads((run / "history/config.json").read_text())
-    record.pop("shared_network", None)
     return Config.from_record(record)
 
 

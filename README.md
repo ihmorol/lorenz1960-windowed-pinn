@@ -43,7 +43,7 @@ The command does not train a model. It writes:
 Run the source regression tests with:
 
 ```bash
-python -m pytest src/pinn/test_pinn.py src/pinn/test_stress.py
+python -m pytest src/pinn/test_pinn.py src/pinn/test_stress.py src/pinn/test_resume_and_suite.py
 ```
 
 ## Inspect one saved model
@@ -60,22 +60,30 @@ To print the archived ablation summary and its statistical comparisons:
 python scripts/ablation_report.py
 ```
 
-## Train the principal configurations
+## Training code and archived settings
 
-These commands are computationally expensive and are not part of verification.
+The completed training implementation is recovered from the commit recorded
+by the archived Colab environment, `ed43703233264b5568ec4598dedc1cf84ac0f452`.
+It includes the shared-network control and the full-interval causal arm.
+The obsolete standalone sequential prototype is excluded.
+
+To run new experiments in a separate directory with the paper's arm/seed map:
 
 ```bash
-python run_pinn.py
-python run_causal.py
-python scripts/paper_ablations.py --arms r1,r2,r4,r3 --seeds 1,2,3
+python scripts/paper_ablations.py --arms r1,r2,r6 --seeds 1,2,3 --out runs/reproduction
+python scripts/paper_ablations.py --arms r4 --seeds 1,2,3,4 --out runs/reproduction
+python scripts/paper_ablations.py --arms r3 --seeds 0 --out runs/reproduction
 ```
 
-`run_pinn.py` uses the central defaults. `run_causal.py` trains the selected
-27-window causal configuration. The ablation driver is resume-safe when a
-complete summary already exists. The recovered `sequential_run.py` is retained
-for provenance but is incomplete and does not match the archived R6 settings;
-it is not a supported retraining command. R6 checkpoint evaluation is verified.
-A corrected reproduction runner requires a separate, explicitly recorded change.
+These commands are expensive and were not run to completion during archive
+verification. They leave the published results intact. `run_causal.py` provides
+the seed-0 candidate configuration; `run_pinn.py` is a general training entrypoint.
+The Colab driver, `scripts/colab_suite.py`, uses the same 14-run ablation plan
+and supports a separate `--out` directory. It is covered by local regression
+tests; a live Colab/Drive session has not been retested.
+
+See [the paper evidence audit](artifacts/paper-evidence.md) for completed
+experiments and the limits of the available evidence.
 
 ## Archived experiment map
 
@@ -116,9 +124,11 @@ The archived Colab record identifies commit
 corresponding uncommitted diff was not archived, so that commit alone cannot
 certify the exact historical training source. The committed configurations are
 the numerical authority for reconstructing each model, and the checkpoints are
-verified directly against their saved summaries. The currently audited source
-was recovered in commit `babc47aab9f7cdbe8fde832cdd1e670eab1f9210` and copied
-from repository snapshot `36ccfea89c05400aeca5d774c5ec4ad871497d09`.
+verified directly against their saved summaries. The initial bundle used result-branch snapshot
+`36ccfea89c05400aeca5d774c5ec4ad871497d09`. Its outdated training files were
+subsequently replaced by the completed implementation at the recorded
+`ed43703233264b5568ec4598dedc1cf84ac0f452` commit.
+`artifacts/source-check.json` identifies those recovered files.
 
 Some archived seed-0 runs were produced on a GPU and later runs include CPU and
 GPU executions. Floating-point results may differ slightly across hardware and

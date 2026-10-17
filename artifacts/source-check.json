@@ -3,14 +3,11 @@
   "executable_ast_checked": [
     "src/baseline/lorenz1960_baseline.py",
     "src/baseline/lorenz1960_solver.py",
-    "src/pinn/config.py",
     "src/pinn/history.py",
-    "src/pinn/pinn.py",
     "src/pinn/problems.py",
     "src/pinn/sweep.py",
     "src/pinn/test_pinn.py",
     "src/pinn/test_stress.py",
-    "src/pinn/train.py",
     "src/pinn/__init__.py",
     "src/pinn/functions/collocation.py",
     "src/pinn/functions/derivative.py",
@@ -30,20 +27,47 @@
     "src/pinn/viz/trajectory3d.py",
     "src/pinn/viz/__init__.py",
     "scripts/ablation_report.py",
-    "scripts/colab_suite.py",
-    "scripts/paper_ablations.py",
     "scripts/paper_physics_checks.py",
-    "scripts/pipeline_figure.py",
-    "scripts/sequential_run.py"
+    "scripts/pipeline_figure.py"
   ],
   "presentation_changes": [
     "src/baseline/lorenz1960_solver.py",
-    "src/pinn/config.py",
     "src/pinn/viz/figures.py"
   ],
   "permitted_difference": {
     "src/baseline/lorenz1960_solver.py": "Console heading removes course label; no numerical statement changes."
   },
   "test_update": "Snapshot assertion specifies exact epochs 0, 6, 11 and 12, including both pre-step and final-state snapshots.",
-  "test_scope_update": "The compact package test asserts all four supported root commands exist and compiles every shipped root command, script and source module; original unrelated film and viewer entrypoints are outside package scope."
+  "test_scope_update": "The compact package test asserts all four supported root commands exist and compiles every shipped root command, script and source module; original unrelated film and viewer entrypoints are outside package scope.",
+  "completed_training_recovery": {
+    "commit": "ed43703233264b5568ec4598dedc1cf84ac0f452",
+    "files": [
+      "src/pinn/config.py",
+      "src/pinn/pinn.py",
+      "src/pinn/train.py",
+      "scripts/paper_ablations.py",
+      "scripts/colab_suite.py",
+      "scripts/paper_tables.py",
+      "src/pinn/test_resume_and_suite.py"
+    ],
+    "check": "executable AST compared with recorded commit; docstring links adjusted to README.md",
+    "removed_obsolete_file": "scripts/sequential_run.py",
+    "ast_verification": "pass",
+    "archived_settings_match": [
+      "r1_no_causal_seed1",
+      "r1_no_causal_seed2",
+      "r1_no_causal_seed3",
+      "r2_no_warm_seed1",
+      "r2_no_warm_seed2",
+      "r2_no_warm_seed3",
+      "r3_causal_single_seed0",
+      "r4_candidate_seed1",
+      "r4_candidate_seed2",
+      "r4_candidate_seed3",
+      "r4_candidate_seed4",
+      "r6_sequential_seed1",
+      "r6_sequential_seed2",
+      "r6_sequential_seed3"
+    ]
+  }
 }
