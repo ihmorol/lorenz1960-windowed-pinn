@@ -1,0 +1,178 @@
+[
+  {
+    "run": "runs/paper_ablations/r1_no_causal_seed1",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "c5c685dab33b7bbd6c395273ef92ef5967dc854da28c7dea04bc4f112376d8d5",
+    "published_config_sha256": "872f8d2d2569947ac850cc662a7fdcdfccba83fb242aad4edd13fccc2cd161ab",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r1_no_causal_seed1",
+      "ckpt_dir": "runs/paper_ablations/r1_no_causal_seed1/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r1_no_causal_seed2",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "127f6777e4a9a12f4499461169c4fe572e572614971f8abb9c07de80a303b444",
+    "published_config_sha256": "901b8468bdbc8e5beb09a9139a9e8ace0e84cc8196daefdf0124c8e4877306e7",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r1_no_causal_seed2",
+      "ckpt_dir": "runs/paper_ablations/r1_no_causal_seed2/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r1_no_causal_seed3",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "6de75270bad7f93357934d886c35483f93ae6aa53976af1d1741b858172e4fbe",
+    "published_config_sha256": "46ca54cb634ef6fa44ac0e87c624643cbb741fda54b86ac47a1ac421e511b862",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r1_no_causal_seed3",
+      "ckpt_dir": "runs/paper_ablations/r1_no_causal_seed3/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r2_no_warm_seed1",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "df0b816bb3f37fa2cf171c79821c9508904c39a15fd614f049856c68380693f3",
+    "published_config_sha256": "4e6bbd65927351c7ffa160fd7e5baa4bd9770dc30d9510c8569c8b61a601a91d",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r2_no_warm_seed1",
+      "ckpt_dir": "runs/paper_ablations/r2_no_warm_seed1/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r2_no_warm_seed2",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "57a618a673fad1a2b5750abc4fdc374773453f1f8e1b7076b141a5ec00206460",
+    "published_config_sha256": "7bf17d95e0dbdac44bb8e00e17d5d282d967ddd076eb87f623d8ed11f5974906",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r2_no_warm_seed2",
+      "ckpt_dir": "runs/paper_ablations/r2_no_warm_seed2/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r2_no_warm_seed3",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "8015165db29beb7e0e6ae7fe4918723b205d1c91f1bba394f55edd4598f3bdf9",
+    "published_config_sha256": "54f7aba97a22356c6d38432b8d50575f277fb32392c1de249ba8c92ae400fb3e",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r2_no_warm_seed3",
+      "ckpt_dir": "runs/paper_ablations/r2_no_warm_seed3/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r3_causal_single_seed0",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "000c68fab657e3e52b68de9ff0e75ebd4373ec50977b317c9815245a3a1bbf3e",
+    "published_config_sha256": "fdd5b91d32dcf9c658b394c2eb92ea37d23c8b68adfebb4fcfe47132bebf0c27",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r3_causal_single_seed0",
+      "ckpt_dir": "runs/paper_ablations/r3_causal_single_seed0/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r4_candidate_seed1",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "0ed59baa8e9898b3c4372e5f2edb57a1d983421cd9abe399f65a6c21c574e325",
+    "published_config_sha256": "48012241afe46ec049d64ca51b00fe7aa9a420648e3ea34811c76b5640d91cc8",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r4_candidate_seed1",
+      "ckpt_dir": "runs/paper_ablations/r4_candidate_seed1/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r4_candidate_seed2",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "3317e6dcfb77457501ffd2e1a0b7a6ddd75223895f8511b03a89144ed0a02b94",
+    "published_config_sha256": "aea1733ab0ab6caa7c3e742ffe35dcf3745c5f6fd838284d4ae509e2e2b02690",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r4_candidate_seed2",
+      "ckpt_dir": "runs/paper_ablations/r4_candidate_seed2/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r4_candidate_seed3",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "3789a6b3d21d5db4baa9a8b08482f3db93e6111b4082d4f3c568f7766e1c30b3",
+    "published_config_sha256": "3cbf2482b5f884db4617d9707d388548785b6b6d6b396bbdd4f234c4ccd6e6fc",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r4_candidate_seed3",
+      "ckpt_dir": "runs/paper_ablations/r4_candidate_seed3/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r4_candidate_seed4",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "291adb7501c060b0a21afa56a8c51324cbb67e9adc97f0ce4a4c087c2afa23d7",
+    "published_config_sha256": "4c82e2bf3bdaa51d89b24775c4dc62a03a2bb21d61f6fefabaa4fed6a6f00071",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r4_candidate_seed4",
+      "ckpt_dir": "runs/paper_ablations/r4_candidate_seed4/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r6_sequential_seed1",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "ea17616f615f9673cccf149c6c3d36d51eec1cc20edb1fb63ba561ab5ed74ed7",
+    "published_config_sha256": "1840947ff61f2a6fd21265df68f98e05e049be180c9819073d2d1779b0bfb370",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r6_sequential_seed1",
+      "ckpt_dir": "runs/paper_ablations/r6_sequential_seed1/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r6_sequential_seed2",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "06d28457200223fd3d734bcb0223320d45cbac8045d9d21a4e485a69382b0096",
+    "published_config_sha256": "aca7fb18ff2445714a27fee513a441e6125a78f591cc9f3a04a9e9725659d54f",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r6_sequential_seed2",
+      "ckpt_dir": "runs/paper_ablations/r6_sequential_seed2/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/paper_ablations/r6_sequential_seed3",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "4a0740c7a7ca610c8329b4b1c899681215476bed36abb3f5a335b7cb4b08f1b1",
+    "published_config_sha256": "a3787d2a8d1236d42eec5ed0cdd1e5fd5441b18a8f721d7e13c4d277f1c69dde",
+    "path_transform": {
+      "results_dir": "runs/paper_ablations/r6_sequential_seed3",
+      "ckpt_dir": "runs/paper_ablations/r6_sequential_seed3/history",
+      "runs_dir": "runs/paper_ablations"
+    }
+  },
+  {
+    "run": "runs/4x60_f64_unit",
+    "origin": "derived from run_summary.csv by config_for",
+    "original_config_sha256": null,
+    "published_config_sha256": "42288c3ad407422dc0e36af30b7f0903e2ec2f1f74d82bc64f0d5cc1babc9ecc",
+    "path_transform": {
+      "results_dir": "runs/4x60_f64_unit",
+      "ckpt_dir": "runs/4x60_f64_unit/history",
+      "runs_dir": "runs"
+    }
+  },
+  {
+    "run": "runs/causal-window/candidate-1536pt/4x60_f64_unit_win27_causal_warm_f1cbeebd",
+    "origin": "archived config; output paths normalized",
+    "original_config_sha256": "2ce439ecdb4b6587ed10bf64e7a9bd5801d12c43d2b8793882178b594d6599fe",
+    "published_config_sha256": "92327f105d2e7cccd9ef616fa9d2ebe6475019f8e3ea4a3b65b42380924048cb",
+    "path_transform": {
+      "results_dir": "runs/causal-window/candidate-1536pt/4x60_f64_unit_win27_causal_warm_f1cbeebd",
+      "ckpt_dir": "runs/causal-window/candidate-1536pt/4x60_f64_unit_win27_causal_warm_f1cbeebd/history",
+      "runs_dir": "runs/causal-window/candidate-1536pt"
+    }
+  }
+]

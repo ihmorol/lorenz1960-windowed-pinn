@@ -1,0 +1,7 @@
+{
+  "invariant_drift_prediction": 0.0004051357627330717,
+  "invariant_drift_reference": 1.7555875778993615e-10,
+  "period_prediction": 13.265460034680336,
+  "period_reference": 13.265460034680336,
+  "eval_points": 13265
+}

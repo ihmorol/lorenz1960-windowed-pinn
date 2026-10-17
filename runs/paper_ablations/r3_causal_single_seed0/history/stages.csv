@@ -1,0 +1,5 @@
+window,eps,adam_steps,min_w_final,threshold_met
+0,0.01,10000,0.8789861738524727,False
+0,0.1,10000,0.2795941796263619,False
+0,1.0,10000,5.554116101886998e-32,False
+0,10.0,10000,0.0,False

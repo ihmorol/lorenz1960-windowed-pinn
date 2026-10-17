@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+# Source lives under src/ (src layout); put it on sys.path so `import pinn` works
+# without installing the package.
+pythonpath = ["src"]
+testpaths = ["src/pinn"]
+addopts = "-q"

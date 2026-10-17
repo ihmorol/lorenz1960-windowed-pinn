@@ -1,0 +1,15 @@
+{
+  "stress_tests": {
+    "passed": 31,
+    "failed": 0
+  },
+  "core_suite": {
+    "tests": 41,
+    "unchanged_tests_passed": 40,
+    "remaining_test": "test_root_scripts_compile",
+    "remaining_test_passed_after_package_inventory_update": true
+  },
+  "snapshot_regression": "Exact four pre-step/final-state epoch files asserted; no training behavior changed",
+  "syntax_checks": "All shipped Python files compile",
+  "full_training_rerun": false
+}

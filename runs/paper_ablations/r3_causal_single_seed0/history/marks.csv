@@ -1,0 +1,6 @@
+iteration,eps,kind
+10000,0.01,eps
+20000,0.1,eps
+30000,1.0,eps
+40000,10.0,eps
+45529,,window

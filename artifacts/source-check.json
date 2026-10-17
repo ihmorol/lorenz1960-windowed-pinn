@@ -1,0 +1,49 @@
+{
+  "source_snapshot": "36ccfea89c05400aeca5d774c5ec4ad871497d09",
+  "executable_ast_checked": [
+    "src/baseline/lorenz1960_baseline.py",
+    "src/baseline/lorenz1960_solver.py",
+    "src/pinn/config.py",
+    "src/pinn/history.py",
+    "src/pinn/pinn.py",
+    "src/pinn/problems.py",
+    "src/pinn/sweep.py",
+    "src/pinn/test_pinn.py",
+    "src/pinn/test_stress.py",
+    "src/pinn/train.py",
+    "src/pinn/__init__.py",
+    "src/pinn/functions/collocation.py",
+    "src/pinn/functions/derivative.py",
+    "src/pinn/functions/losses.py",
+    "src/pinn/functions/optimizers.py",
+    "src/pinn/functions/physics.py",
+    "src/pinn/functions/reference.py",
+    "src/pinn/functions/trial.py",
+    "src/pinn/functions/windows.py",
+    "src/pinn/functions/__init__.py",
+    "src/pinn/viz/compare.py",
+    "src/pinn/viz/evaluation.py",
+    "src/pinn/viz/figures.py",
+    "src/pinn/viz/index.py",
+    "src/pinn/viz/landscape.py",
+    "src/pinn/viz/training.py",
+    "src/pinn/viz/trajectory3d.py",
+    "src/pinn/viz/__init__.py",
+    "scripts/ablation_report.py",
+    "scripts/colab_suite.py",
+    "scripts/paper_ablations.py",
+    "scripts/paper_physics_checks.py",
+    "scripts/pipeline_figure.py",
+    "scripts/sequential_run.py"
+  ],
+  "presentation_changes": [
+    "src/baseline/lorenz1960_solver.py",
+    "src/pinn/config.py",
+    "src/pinn/viz/figures.py"
+  ],
+  "permitted_difference": {
+    "src/baseline/lorenz1960_solver.py": "Console heading removes course label; no numerical statement changes."
+  },
+  "test_update": "Snapshot assertion specifies exact epochs 0, 6, 11 and 12, including both pre-step and final-state snapshots.",
+  "test_scope_update": "The compact package test asserts all four supported root commands exist and compiles every shipped root command, script and source module; original unrelated film and viewer entrypoints are outside package scope."
+}

@@ -1,0 +1,53 @@
+{
+  "k": 2.0,
+  "l": 1.0,
+  "initial_state": [
+    0.5,
+    0.75,
+    1.0
+  ],
+  "t_span": [
+    0.0,
+    13.26446
+  ],
+  "problem": "lorenz1960",
+  "end_state": null,
+  "n_windows": 27,
+  "causal_eps_schedule": [
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "causal_delta": 0.99,
+  "causal_max_iters": 4000,
+  "warm_start": false,
+  "shared_network": false,
+  "depth": 4,
+  "width": 60,
+  "activation": "tanh",
+  "ic": "hard",
+  "gamma": 1.0,
+  "ic_scale": "unit",
+  "epochs": 20000,
+  "lbfgs_iters": 1000,
+  "lr_start": 0.001,
+  "lr_end": 0.0001,
+  "seed": 3,
+  "n_collocation": 41446,
+  "n_eval": 13265,
+  "points_per_unit": null,
+  "eval_per_unit": 1000,
+  "collocation": "uniform",
+  "dtype": "float64",
+  "lr_decay": 0.9,
+  "lr_decay_every": 1000,
+  "log_every": 10,
+  "eval_every": 100,
+  "print_every": 250,
+  "snapshot_every": 2000,
+  "checkpoint_every": 0,
+  "results_dir": "runs/paper_ablations/r2_no_warm_seed3",
+  "ckpt_dir": "runs/paper_ablations/r2_no_warm_seed3/history",
+  "runs_dir": "runs/paper_ablations"
+}
